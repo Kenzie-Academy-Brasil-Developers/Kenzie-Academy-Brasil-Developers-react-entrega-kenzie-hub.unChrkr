@@ -10,6 +10,8 @@ import { RegisterContainer, FormContainer, PinkButton, HeaderSpan, FormDiv } fro
 
 export const RegisterForm = ({ }) => {
 
+    const { userRegister } = useContext(UserInfoContext)
+
     const FormDemands = yup.object().shape({
         name: yup.string().required('Nome obrigatório'),
         email: yup.string(),
@@ -33,18 +35,6 @@ export const RegisterForm = ({ }) => {
     })
 
 
-    const SubmitFunction = async (data) => {
-        try {
-            await axios.post('https://kenziehub.herokuapp.com/users', data)
-            navigate('/')
-            toast.success('Cadastro realizado com sucesso!')
-
-        } catch (error) {
-            toast.error('Usuário já existente')
-
-        }
-    }
-
     const handleForm = event => {
         event.preventDefault()
 
@@ -56,7 +46,7 @@ export const RegisterForm = ({ }) => {
             <h1>Kenzie Hub</h1>
             <button onClick={back}>Voltar</button>
         </HeaderSpan>
-        <FormContainer onSubmit={handleSubmit(SubmitFunction)}>
+        <FormContainer onSubmit={handleSubmit(userRegister)}>
             <form action="">
                 <FormDiv>
                     <h2>Crie sua conta</h2>
@@ -94,3 +84,7 @@ export const RegisterForm = ({ }) => {
         </FormContainer>
     </RegisterContainer>
 }
+
+
+
+

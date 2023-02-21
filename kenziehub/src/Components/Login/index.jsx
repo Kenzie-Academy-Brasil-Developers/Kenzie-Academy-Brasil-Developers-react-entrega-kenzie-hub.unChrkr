@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IndexContainer, FormContainer, StyledP, PinkButton, GreyButton } from './styled'
+import { useContext } from "react";
+import { UserInfoContext } from '../../Providers/UserInfoContext'
 
 
-export const LoginForm = ({ }) => {
+export const LoginForm = () => {
+
+    const { userLogin } = useContext(UserInfoContext)
 
     const FormDemands = yup.object().shape({
         email: yup.string().required('Email obrigatório'),
@@ -20,21 +23,10 @@ export const LoginForm = ({ }) => {
     const navigate = useNavigate()
     const toRegister = () => navigate('/registerform')
 
-    const SubmitFunction = async (data) => {
-        try {
-            const response = await axios.post('https://kenziehub.herokuapp.com/sessions', data)
-            localStorage.setItem('userToken', response.data.token)
-            localStorage.setItem('userId', response.data.user.id)
-            navigate('/dashboardpage')
-
-        } catch (error) {
-
-        }
-    }
     return <IndexContainer>
         <h1>Kenzie Hub</h1>
         <FormContainer>
-            <form onSubmit={handleSubmit(SubmitFunction)}>
+            <form onSubmit={handleSubmit(userLogin)}>
                 <span>
                     <h2>Login</h2>
                 </span>

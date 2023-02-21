@@ -1,40 +1,19 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { DashboardContainer, StyledHeader, StyledHeader_divUpper, StyledHeader_divLower, StyledMain } from './styled'
+import { UserInfoContext } from "../../Providers/UserInfoContext"
+import Modal from 'react-modal'
+import { CreateModalContext } from "../../Providers/ModalContext"
 
 
-export const DashboardPage = ({ }) => {
+
+export const DashboardPage = () => {
 
 
-    const [info, setInfo] = useState([null])
-
+    const { openModal, closeModal, modal } = useContext(CreateModalContext)
+    const { info, exit } = useContext(UserInfoContext)
     const navigate = useNavigate()
 
-    const Exit = () => {
-        localStorage.clear()
-        navigate('/')
-    }
-
-    useEffect(() => {
-        const SubmitFunction = async () => {
-            const userToken = localStorage.getItem('userToken')
-            try {
-                const response = await axios.get('https://kenziehub.herokuapp.com/profile', {
-                    headers: {
-                        'Authorization': `Bearer ${userToken}`
-                    }
-                })
-                setInfo(response.data)
-            } catch (error) {
-
-            }
-        }
-        SubmitFunction()
-    }, [])
-
-
-    console.log(info)
 
 
     return (
@@ -42,7 +21,15 @@ export const DashboardPage = ({ }) => {
             <StyledHeader>
                 <StyledHeader_divUpper>
                     <h1>Kenzie Hub</h1>
-                    <button onClick={Exit}>Sair</button>
+                    <button onClick={exit}>Sair</button>
+                    {/* <button onClick={openModal}>Abrir</button>
+                <Modal
+                isOpen={modal}
+                onRequestClose={closeModal}
+                overlayClassName='modal-overlay'>
+                    <button onClick={closeModal}>close</button>
+                </Modal> */}
+  
                 </StyledHeader_divUpper>
                 <StyledHeader_divLower>
                     {info != null && (<h2>{info.name}</h2>)}
@@ -50,6 +37,17 @@ export const DashboardPage = ({ }) => {
                 </StyledHeader_divLower>
             </StyledHeader>
             <StyledMain>
+                <button>+</button>
+                {/* {info != null && (
+                    info.map(element => (
+                        <ul>
+                            <li>
+                                <p>{element.techs.title}</p>
+                                <p>{element.techs.status}</p>
+                            </li>
+                        </ul>
+                    ))
+                )} */}
                 <h2>Que pena! Estamos em desenvolvimento</h2>
                 <p>Nossa aplicação está em desenvolvimento, em breve teremos novidades.</p>
             </StyledMain>

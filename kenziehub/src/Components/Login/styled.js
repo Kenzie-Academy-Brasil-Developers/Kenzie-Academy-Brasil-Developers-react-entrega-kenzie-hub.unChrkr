@@ -93,6 +93,10 @@ export const PinkButton = styled.button`
     border-radius: 5px;
     border: none;
     margin-top: 12px;
+    border: 1px solid var(--color-pink-easy);
+    :hover{
+        border: 1px solid white;
+    }
 
 `
 
@@ -102,4 +106,8 @@ export const GreyButton = styled.button`
     border-radius: 5px;
     border: none;
     padding: 12px;
+    border: 1px solid var(--color-grey-4);
+    :hover{
+        border: 1px solid white;
+    }
 `
