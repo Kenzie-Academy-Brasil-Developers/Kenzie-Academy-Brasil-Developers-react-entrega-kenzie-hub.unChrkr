@@ -1,9 +1,14 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import { TechContext } from "./TechsContext";
+
+
 
 
 export const UserInfoContext = createContext({})
+
 
 export const UserInfoProvider = ({ children }) => {
 
@@ -36,6 +41,7 @@ export const UserInfoProvider = ({ children }) => {
         navigate('/')
     }
 
+
     const userLogin = async (data) => {
         try {
             const response = await axios.post('https://kenziehub.herokuapp.com/sessions', data)
@@ -45,11 +51,9 @@ export const UserInfoProvider = ({ children }) => {
             navigate('/dashboardpage')
 
         } catch (error) {
-            console.log(error)
+            toast.error('Usuário não existente')
         }
     }
-
-
 
 
     const userRegister = async (data) => {
@@ -57,10 +61,8 @@ export const UserInfoProvider = ({ children }) => {
             await axios.post('https://kenziehub.herokuapp.com/users', data)
             navigate('/')
             toast.success('Cadastro realizado com sucesso!')
-
         } catch (error) {
             toast.error('Usuário já existente')
-
         }
     }
 

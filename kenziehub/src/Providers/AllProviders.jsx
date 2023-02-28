@@ -1,17 +1,17 @@
 import React from "react";
 import { UserInfoProvider } from "./UserInfoContext";
-import { CreateUserProvider } from "./CreateTechContext";
+import { TechContextProvider } from "./TechsContext";
 import { CreateModalProvider } from "./ModalContext";
 
 
 const Providers = ({ children }) => {
     return (
         <UserInfoProvider>
-            <CreateUserProvider>
+            <TechContextProvider>
                 <CreateModalProvider>
                     {children}
                 </CreateModalProvider>
-            </CreateUserProvider>
+            </TechContextProvider>
         </UserInfoProvider>
     )
 }

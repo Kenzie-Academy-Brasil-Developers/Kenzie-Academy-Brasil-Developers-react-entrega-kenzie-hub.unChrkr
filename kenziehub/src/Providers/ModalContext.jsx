@@ -7,6 +7,8 @@ export const CreateModalContext = createContext()
 export const CreateModalProvider = ({ children }) => {
 
     const [modal, setModal] = useState(false)
+    const [modalUpdate, setModalUpdate] = useState(false)
+    const [currentTech, setCurrentTech] = useState(null)
 
     const openModal = () => {
         setModal(true)
@@ -17,7 +19,7 @@ export const CreateModalProvider = ({ children }) => {
     }
 
     return(
-        <CreateModalContext.Provider value={{ modal, closeModal, openModal }}>
+        <CreateModalContext.Provider value={{ modal, closeModal, openModal, modalUpdate, setModalUpdate, currentTech, setCurrentTech }}>
             {children}
         </CreateModalContext.Provider>
     )

@@ -11,15 +11,15 @@ export const ProtectedRoutes = () => {
     const { info } = useContext(UserInfoContext)
 
     useEffect(() => {
-        if(!info){
+        if (!localStorage.getItem('userToken')) {
             navigate('/')
         }
 
     }, [])
 
-    return(
+    return (
         <>
-            {info ? <Outlet/>: null}
+            {info ? <Outlet /> : null}
         </>
     )
 }

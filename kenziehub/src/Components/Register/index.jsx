@@ -6,6 +6,8 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import { useState } from "react";
 import { RegisterContainer, FormContainer, PinkButton, HeaderSpan, FormDiv } from './styled'
+import { useContext } from "react";
+import { UserInfoContext } from "../../Providers/UserInfoContext";
 
 
 export const RegisterForm = ({ }) => {
@@ -79,8 +81,6 @@ export const RegisterForm = ({ }) => {
                 </select>
                 <PinkButton type="submit">Cadastrar</PinkButton>
             </form>
-
-
         </FormContainer>
     </RegisterContainer>
 }
