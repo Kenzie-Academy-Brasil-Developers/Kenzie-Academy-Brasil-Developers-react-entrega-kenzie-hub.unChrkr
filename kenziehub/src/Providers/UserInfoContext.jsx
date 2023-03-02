@@ -15,6 +15,7 @@ export const UserInfoProvider = ({ children }) => {
     const navigate = useNavigate()
 
     const [info, setInfo] = useState(null)
+    const [techs, setTechs] = useState([])
 
     useEffect(() => {
         const autoLoginUser = async () => {
@@ -27,7 +28,8 @@ export const UserInfoProvider = ({ children }) => {
                         }
                     })
                     setInfo(response.data)
-                    navigate('dashboardpage')
+                    setTechs(response.data.techs)
+                    navigate('/dashboardpage')
                 } catch (error) {
                     console.log(error)
                 }
@@ -48,6 +50,7 @@ export const UserInfoProvider = ({ children }) => {
             localStorage.setItem('userToken', response.data.token)
             localStorage.setItem('userId', response.data.user.id)
             setInfo(response.data.user)
+            setTechs(response.data.user.techs)
             navigate('/dashboardpage')
 
         } catch (error) {
@@ -68,7 +71,7 @@ export const UserInfoProvider = ({ children }) => {
 
 
     return (
-        <UserInfoContext.Provider value={{ info, setInfo, userLogin, userRegister, exit }}>
+        <UserInfoContext.Provider value={{ info, setInfo, userLogin, userRegister, exit, techs, setTechs }}>
             {children}
         </UserInfoContext.Provider>
     )

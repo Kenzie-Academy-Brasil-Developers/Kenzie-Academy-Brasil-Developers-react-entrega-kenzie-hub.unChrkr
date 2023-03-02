@@ -11,16 +11,8 @@ export const TechContext = createContext()
 
 export const TechContextProvider = ({ children }) => {
 
-  const { info, setInfo } = useContext(UserInfoContext)
-  const [techs, setTechs] = useState([])
-
-  useEffect(() => {
-    if (info) {
-      setTechs(info.techs)
-    }
-  }, [info])
-
-
+  const { techs, setTechs } = useContext(UserInfoContext)
+  
   async function createTechs(data) {
     try {
       const userToken = localStorage.getItem('userToken')
@@ -35,7 +27,6 @@ export const TechContextProvider = ({ children }) => {
       toast.error('Tecnologia já existente')
     }
   }
-
 
   const removeTechs = async (techsID) => {
     try {
@@ -68,7 +59,7 @@ export const TechContextProvider = ({ children }) => {
         if (techsID === tech.id) {
           return { ...tech, ...formData };
         } else {
-          return techs
+          return tech
         }
       })
       setTechs(updatedTechs)

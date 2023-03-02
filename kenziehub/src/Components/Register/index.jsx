@@ -16,7 +16,7 @@ export const RegisterForm = ({ }) => {
 
     const FormDemands = yup.object().shape({
         name: yup.string().required('Nome obrigatório'),
-        email: yup.string(),
+        email: yup.string().required('Email obrigatório'),
         password: yup.string().required('Senha obrigatória')
             .matches(/[a-z] || [A-Z]/, "Deve conter ao menos 1 letra")
             .matches(/(\d)/, "Deve conter ao menos 1 número")
