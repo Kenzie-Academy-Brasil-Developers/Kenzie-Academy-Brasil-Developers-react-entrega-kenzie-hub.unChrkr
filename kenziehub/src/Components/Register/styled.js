@@ -20,7 +20,7 @@ export const FormContainer = styled.div`
     border-radius: 5px;
 
     @media(min-width: 769px){
-        height: 700px;
+        height: 850px;
         width: 380px;
 
     }
@@ -37,9 +37,9 @@ export const FormContainer = styled.div`
             width: 5px;
 }
         @media(min-width: 769px){
-            height: 700px;
+            height: 850px;
             width: 380px;
-            gap: 28px;
+            gap: 10px;
         }
 
         input{
